@@ -29,7 +29,7 @@ struct Biblioteca{
     int n_livros = 0, total = 0, n=0, maior = 0, i = 0;
 
     void cadastro(){
-        printf("Quantos livros quer cadastrar?");
+        printf("Quantos livros quer cadastrar? ");
         scanf("%d%*c", &n_livros);
         total = total + n_livros;
         if(total <= 10){
@@ -44,6 +44,7 @@ struct Biblioteca{
 
     void todos_livros(){
         for(i = 0; i < total; i++){
+            printf ("Livro %d\n", i+1);
             livro[i].imprimir();
             printf("\n");
         }
