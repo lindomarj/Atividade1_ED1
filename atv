@@ -1,0 +1,94 @@
+#include<stdio.h>
+
+struct Livros{
+
+    char nome_livro[200];
+    char autor[200];
+    int n_pag = 0;
+
+    void ler(){
+        printf("Digite o nome do livro \n");
+        scanf("%[^\n]%*c", nome_livro);
+        printf("Digite o nome do autor \n");
+        scanf("%[^\n]%*c", autor);
+        printf("Digite o numero de paginas\n");
+        scanf("%d%*c", &n_pag);
+    }
+
+    void imprimir(){
+        printf("Nome: %s\n", nome_livro);
+        printf("Autor: %s\n", autor);
+        printf("Numero de paginas: %d\n", n_pag);
+    }
+};
+
+struct Biblioteca{
+
+    Livros livro[10];
+
+    int n_livros = 0, total = 0, n=0, maior = 0, i = 0;
+
+    void cadastro(){
+        printf("Quantos livros quer cadastrar?");
+        scanf("%d%*c", &n_livros);
+        total = total + n_livros;
+        if(total <= 10){
+            for(i = n; i < total; i++){
+                livro[i].ler();
+            }
+            n = total;
+        }else {
+            printf("Numero maximo de livros excedido.\n");
+        }
+    }
+
+    void todos_livros(){
+        for(i = 0; i < total; i++){
+            livro[i].imprimir();
+            printf("\n");
+        }
+    }
+
+    void maior_paginacao() {
+        maior = 0;
+        for(i = 1; i < total; i++){
+            if(livro[i].n_pag > livro[maior].n_pag){
+                maior = i;
+            }
+        }
+        printf("O livro que contem o maior numero de paginas e: \n");
+        livro[maior].imprimir();
+    }
+
+};
+
+int main (){
+
+    int opcao;
+
+    Biblioteca biblioteca[10];
+
+    do{
+        printf("1. Cadastrar novo livro.\n");
+        printf("2. Ver todos os livros.\n");
+        printf("3. Livro com maior numero de paginas.\n");
+        printf("4. Sair.\n");
+        scanf("%d%*c", &opcao);
+        switch(opcao){
+            case 1:
+                biblioteca[0].cadastro();
+                break;
+            case 2:
+                biblioteca[0].todos_livros();
+                break;
+            case 3:
+                biblioteca[0].maior_paginacao();
+                break;
+            case 4:
+                break;
+        }
+
+    }while(opcao != 4);
+
+    return 0;
+}
